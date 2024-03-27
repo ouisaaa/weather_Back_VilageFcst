@@ -40,7 +40,6 @@ public class APIResult {
         int nowMonth= Integer.valueOf(String.valueOf(LocalDate.now().getMonthValue()));
 
         JSONArray windChillList = new JSONArray();
-        JSONObject windChill = new JSONObject();
 
         /**
          *
@@ -49,11 +48,13 @@ public class APIResult {
          *
          * */
         for(int i=0;i<Forecast_Count;i++){
+            JSONObject windChill = new JSONObject();
             if(nowMonth > 4 && nowMonth < 10 || (itemArray.getJSONObject(T1H_start_index + i).getDouble("fcstValue") > 10.0 &&
                     itemArray.getJSONObject(WSD_start_index + i).getDouble("fcstValue") < 1.3)){
                 windChill.put("fcstTime",itemArray.getJSONObject(T1H_start_index+i).getString("fcstTime"));
                 windChill.put("fcstValue", getInSummer(itemArray.getJSONObject(T1H_start_index+i).getDouble("fcstValue")
                         ,itemArray.getJSONObject(REH_start_index+i).getDouble("fcstValue")));
+
             }else{
                 windChill.put("fcstTime",itemArray.getJSONObject(T1H_start_index+i).getString("fcstTime"));
                 windChill.put("fcstValue", getInWinter(itemArray.getJSONObject(T1H_start_index+i).getDouble("fcstValue")
@@ -61,6 +62,7 @@ public class APIResult {
             }
             windChillList.put(windChill);
         }
+
 
         JSONObject resultWindChill = new JSONObject();
         resultWindChill.put("windChill", windChillList);

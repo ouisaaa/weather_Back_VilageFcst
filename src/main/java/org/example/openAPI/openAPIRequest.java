@@ -27,11 +27,12 @@ import java.util.HashMap;
 public class openAPIRequest {
     private final OpenAPIComponent openAPIComponent;
     private final ScheduledAnnouncement scheduledAnnouncement= new ScheduledAnnouncement();
-    private String nowDate = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
+    private String nowDate = scheduledAnnouncement.getAnnouncenmentDate();
     private String nowTime = scheduledAnnouncement.getAnnouncementTime();
 
 
-    public APIResult openAPIRequestHttp(int nx,int ny) {
+    //초단기예보 메소드
+    public APIResult SrtFcst(int nx,int ny) {
         String urlLink = openAPIComponent.getLink()+"?serviceKey="+openAPIComponent.getServiceKey()
                 +"&numOfRows="+openAPIComponent.getNumOfRows()
                 +"&dataType="+openAPIComponent.getDataType()
@@ -77,4 +78,6 @@ public class openAPIRequest {
         }
         return apiResult;
     }
+
+
 }

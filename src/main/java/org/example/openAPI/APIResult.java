@@ -4,8 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 
 public class APIResult {
@@ -17,10 +15,10 @@ public class APIResult {
     }
 
     //openAPI 응답값 + 체감온도 형태의 JSON
-    public JSONObject plusJson(JSONObject json){
+    public JSONObject parsingJson(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("OpenAPI_httpResponse",this.json);
-        jsonObject.put("Wind_Chill",json);
+//        jsonObject.put("Wind_Chill",json);
 
         return jsonObject;
     }

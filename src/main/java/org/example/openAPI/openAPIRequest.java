@@ -32,7 +32,7 @@ public class openAPIRequest {
 
 
     //초단기예보 메소드
-    public APIResult SrtFcst(int nx,int ny) {
+    public APIResult VilageFcst(int nx,int ny) {
         String urlLink = openAPIComponent.getLink()+"?serviceKey="+openAPIComponent.getServiceKey()
                 +"&numOfRows="+openAPIComponent.getNumOfRows()
                 +"&dataType="+openAPIComponent.getDataType()

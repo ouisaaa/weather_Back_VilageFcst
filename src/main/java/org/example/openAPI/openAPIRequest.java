@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.component.OpenAPIComponent;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -54,8 +55,15 @@ public class openAPIRequest {
             while ((line = reader.readLine()) != null) {
                 response.append(line);
             }
+            JSONObject request_json = new JSONObject(response.toString());
 
-            apiResult = new APIResult(new JSONObject(response.toString()));
+            JSONArray data=request_json.getJSONObject("response")
+                    .getJSONObject("body")
+                    .getJSONObject("items")
+                    .getJSONArray("item");
+
+
+            apiResult = new APIResult(new JSONArray(data));
             reader.close();
 
             // 응답 출력

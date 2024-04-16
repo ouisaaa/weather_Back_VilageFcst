@@ -27,13 +27,13 @@ import java.util.HashMap;
 @Component
 public class openAPIRequest {
     private final OpenAPIComponent openAPIComponent;
-    private final ScheduledAnnouncement scheduledAnnouncement= new ScheduledAnnouncement();
-    private String nowDate = scheduledAnnouncement.getAnnouncenmentDate();
-    private String nowTime = scheduledAnnouncement.getAnnouncementTime();
+    //private final ScheduledAnnouncement scheduledAnnouncement= new ScheduledAnnouncement();
+//    private String nowDate = scheduledAnnouncement.getAnnouncenmentDate();
+//    private String nowTime = scheduledAnnouncement.getAnnouncementTime();
 
 
     //초단기예보 메소드
-    public APIResult VilageFcst(int nx,int ny) {
+    public APIResult VilageFcst(int nx,int ny,String nowDate, String nowTime) {
         String urlLink = openAPIComponent.getLink()+"?serviceKey="+openAPIComponent.getServiceKey()
                 +"&numOfRows="+openAPIComponent.getNumOfRows()
                 +"&dataType="+openAPIComponent.getDataType()

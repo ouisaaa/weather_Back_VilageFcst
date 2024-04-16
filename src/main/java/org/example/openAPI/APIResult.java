@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 
@@ -30,6 +31,8 @@ public class APIResult {
     public JSONObject dateRefactoring(String strDate){
         LocalDate date = LocalDate.parse(strDate, DateTimeFormatter.ofPattern("yyyyMMdd"));
         String basisDate;
+        String currentTime= LocalTime.now().getHour()+"00";
+        String[] label={"today","tomorrow","threeDays"};
 
         JSONObject result = new JSONObject();
         JSONArray list;
@@ -41,8 +44,9 @@ public class APIResult {
             list=new JSONArray();
             if(j==0){
                 for(int i=0;i<jsonArray.length();i++){
-                    if(jsonArray.getJSONObject(i).getString("fcstDate").equals(basisDate)){
-
+                    if(jsonArray.getJSONObject(i).getString("fcstDate").equals(basisDate)&&
+                            Integer.parseInt(jsonArray.getJSONObject(i).getString("fcstTime"))>=Integer.parseInt(currentTime)
+                    ){
                         list.put(jsonArray.getJSONObject(i));
                     }
                 }
@@ -53,7 +57,7 @@ public class APIResult {
                     }
                 }
             }
-            result.put(String.valueOf(j),list);
+            result.put(label[j],list);
         }
         return result;
     }
